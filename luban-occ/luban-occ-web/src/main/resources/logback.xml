@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
+<configuration>
+  <!-- 控制台打印日志的相关配置 --> 
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender"> 
+    <!-- 日志格式 %d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%class:%line] - %m%n-->
+    <encoder>
+        <pattern>[%level]%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread]-%m%n</pattern>
+        <charset>UTF-8</charset> 
+    </encoder>
+  </appender>
+
+  <!-- 文件保存日志的相关配置 --> 
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+     <!-- 保存日志文件的路径 -->
+    <file>${com.lubansoft.app.log.dir}/occ-web-log.txt</file>
+    <!-- 日志格式 -->
+    <encoder>
+        <pattern>[%level]%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread]-%m%n</pattern>
+        <charset>UTF-8</charset> 
+    </encoder>
+    <!-- 循环政策：基于时间创建日志文件 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- 日志文件名格式 -->
+      <fileNamePattern>${com.lubansoft.app.log.dir}/occ-web-log.%d{yyyy-MM-dd}.txt</fileNamePattern>
+      <!-- 最大保存时间：30天-->
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+  </appender>
+
+  <!-- 基于dubug处理日志：具体控制台或者文件对日志级别的处理还要看所在appender配置的filter，如果没有配置filter，则使用root配置 ,优先使用application.properties中配置-->
+  <root level="ERROR">
+    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="FILE" />
+  </root>
+</configuration>

@@ -1,0 +1,15 @@
+define({
+  "name": "luban-occ-admin",
+  "version": "1.0.0",
+  "description": "工程运营管理指挥中心采集端API文档",
+  "title": "Custom 工程运营管理指挥中心 browser title",
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2019-04-08T08:42:09.606Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.7"
+  }
+});
