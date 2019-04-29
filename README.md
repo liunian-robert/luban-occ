@@ -1,1 +1,2 @@
-这是springboot 的一个模板项目，里面包含了springboot、dubbo、disconf、redis、springsesson、JWT等技术,
+这是springboot的使用总结
+是springboot 的模板项目，里面包含了springboot、dubbo、disconf、redis、springsesson、JWT等常用技术,集群部署和单点都支持，可以直接pull下来直接使用。
