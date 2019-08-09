@@ -1,10 +1,7 @@
 package com.lubansoft.occ.common.configuration;
 
-import com.baidu.disconf.client.common.annotations.DisconfFile;
-import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 @Configuration
 public class RedisSourceConfig {

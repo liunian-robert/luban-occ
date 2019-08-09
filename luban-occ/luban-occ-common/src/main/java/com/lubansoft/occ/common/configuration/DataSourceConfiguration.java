@@ -1,7 +1,8 @@
 package com.lubansoft.occ.common.configuration;
 
-import javax.sql.DataSource;
-
+import com.alibaba.druid.pool.DruidDataSource;
+import com.lubansoft.occ.common.disconf.component.DataSourceConfig;
+import com.lubansoft.occ.common.util.CustomLogger;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -13,9 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.lubansoft.occ.common.disconf.component.DataSourceConfig;
-import com.lubansoft.occ.common.util.CustomLogger;
+import javax.sql.DataSource;
 
 @Configuration
 @AutoConfigureAfter(DisconfConfiguration.class)
@@ -34,7 +33,7 @@ public class DataSourceConfiguration {
     @Primary
     public DataSource dataSource() throws Exception{
     	CustomLogger.getLog().info("初始化数据库连接池");
-        DruidDataSource datasource = new DruidDataSource();  
+        DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(dataSourceConfig.getUrl());  
         datasource.setUsername(dataSourceConfig.getUsername());  
         datasource.setPassword(dataSourceConfig.getPassword());  

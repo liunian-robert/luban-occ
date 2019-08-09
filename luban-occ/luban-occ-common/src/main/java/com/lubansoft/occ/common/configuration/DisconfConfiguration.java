@@ -1,13 +1,12 @@
 package com.lubansoft.occ.common.configuration;
 
+import com.baidu.disconf.client.DisconfMgrBean;
+import com.baidu.disconf.client.DisconfMgrBeanSecond;
 import com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.baidu.disconf.client.DisconfMgrBean;
-import com.baidu.disconf.client.DisconfMgrBeanSecond;
 import org.springframework.core.Ordered;
 
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class DisconfConfiguration {
 		// disconf 配置文件 (这里只有application.properties)
 		List<String> fileNames = new ArrayList<>();
 		fileNames.add("classpath:redis-occ.properties");
-
+		fileNames.add("classpath:application-subsystem-config.properties");
 		propertiesFactoryBean.setLocations(fileNames);
 		return propertiesFactoryBean;
 	}

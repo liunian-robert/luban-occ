@@ -1,9 +1,8 @@
 package com.lubansoft.occ.common.disconf.component;
 
-import org.springframework.stereotype.Component;
-
 import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
+import org.springframework.stereotype.Component;
 
 @Component
 @DisconfFile(filename = "mysql-occ.properties")

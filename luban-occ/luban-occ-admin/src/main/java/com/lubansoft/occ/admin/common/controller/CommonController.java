@@ -1,49 +1,45 @@
 package com.lubansoft.occ.admin.common.controller;
 
-import com.lubansoft.occ.common.util.Constant;
+import com.lubansoft.occ.admin.common.DirectSender;
+import com.lubansoft.occ.admin.common.FanoutSender;
+import com.lubansoft.occ.admin.common.TopicSender;
+import com.lubansoft.occ.common.model.MQMessage;
+import com.lubansoft.occ.common.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/common")
 public class CommonController {
-    @GetMapping("/sessions/change/{attribute}")
-    public ResponseEntity<?> changeSession(HttpServletRequest request,
-                                              HttpServletResponse response,
-                                           @PathVariable("attribute") String attribute
-    ) throws Exception {
-        //测试集群
-        String jessionId = Constant.LUBAN_SUMMARY_REDIS_SESSION_KEY+request.getSession().getId();
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("jessionId",jessionId);
-        String url = "http://" + request.getServerName() //服务器地址
-                + ":"
-                + request.getServerPort()           //端口号
-                + request.getContextPath()      //项目名称
-                + request.getServletPath();
-        map.put("attribute",url);
-        request.getSession().setAttribute("attribute",url);
-        return ResponseEntity.success(200,map);
-    }
+    @Autowired
+    private DirectSender directSender;
 
+    @Autowired
+    private FanoutSender fanoutSender;
 
-    @GetMapping("/sessions/get")
-    public ResponseEntity<?> getSession(HttpServletRequest request,
-                                              HttpServletResponse response
-    ) throws Exception {
-        String jessionId = Constant.LUBAN_SUMMARY_REDIS_SESSION_KEY+request.getSession().getId();
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("jessionId",jessionId);
-        map.put("attribute",(String)request.getSession().getAttribute("attribute"));
-        return ResponseEntity.success(200,map);
+    @Autowired
+    private TopicSender topicSender;
+
+    //根据企业id查询菜单列表
+    @GetMapping("/message/send/{type}")
+    public ResponseEntity<?> getMainMenuByEpId(@PathVariable("type") int type) throws Exception {
+        MQMessage message = new MQMessage();
+        message.setMessageId(StringUtil.getUUID());
+        message.setMessage("测试rabbitmq消息!");
+        if (type ==1) {
+            directSender.send(message);
+        }
+        if (type==2) {
+            fanoutSender.send(message);
+        }
+        if (type==3) {
+            topicSender.send(message);
+        }
+        return ResponseEntity.success(200,Boolean.TRUE);
     }
 }

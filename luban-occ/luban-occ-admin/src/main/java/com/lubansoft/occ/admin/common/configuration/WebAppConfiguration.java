@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -25,7 +24,7 @@ import java.util.List;
 
 /**
  * web相关配置类
- * @author zhangyapo
+ * @author xiaotao.song
  *
  */
 @Configuration
@@ -57,7 +56,7 @@ public class WebAppConfiguration implements WebMvcConfigurer {
 				.excludePathPatterns("/admin/login")
 				.excludePathPatterns("/admin/getCompanyList")
 				.excludePathPatterns("/admin/loginout")
-		        .excludePathPatterns("/common/sessions/*");
+		        .excludePathPatterns("/common/**");
 		
 	}
 

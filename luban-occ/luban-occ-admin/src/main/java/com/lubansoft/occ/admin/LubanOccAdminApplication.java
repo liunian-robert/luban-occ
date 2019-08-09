@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableDubboConfiguration
 @EnableTransactionManagement//启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 @EnableAsync//支持异步
-@EnableRedisHttpSession(redisNamespace="lubansummary-session",maxInactiveIntervalInSeconds=3600)//自定义redis命名空间
 @EnableScheduling
 @ComponentScan(basePackages={"com.lubansoft.occ.common.*","com.lubansoft.occ.admin.*"})
 @SpringBootApplication
