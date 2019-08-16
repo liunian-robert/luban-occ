@@ -120,25 +120,54 @@
             <artifactId>zkclient</artifactId>
             <version>0.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.yeauty</groupId>
+            <artifactId>netty-websocket-spring-boot-starter</artifactId>
+            <version>0.8.0</version>
+        </dependency>
+        <!--视频截屏-->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+        <!-- javacpp -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacpp</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+        <!-- ffmpeg -->
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>ffmpeg-platform</artifactId>
+            <version>4.0.2-1.4.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>ffmpeg</artifactId>
+            <version>4.0.2-1.4.3</version>
+        </dependency>
     </dependencies>
-	
-	<build>
-		<plugins>
-			<plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- 打成非可执行jar -->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <classifier>exec</classifier>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
                 <executions>
                     <execution>
                         <phase>compile</phase>
@@ -148,6 +177,6 @@
                     </execution>
                 </executions>
             </plugin>
-		</plugins>
-	</build>
+        </plugins>
+    </build>
 </project>
